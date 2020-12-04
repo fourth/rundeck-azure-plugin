@@ -50,6 +50,7 @@ node-executor.selector              =    node_executor
 file-copier.selector                =    file_copier
 vmId.selector                       =    azure_vmId
 tags.selector                       =    tags
+primaryPublicIPAddress.selector     =    azure_primaryPublicIPAddress
 
 image:type.selector                 =    azure_image_type
 image:offer.selector                =    azure_image_offer

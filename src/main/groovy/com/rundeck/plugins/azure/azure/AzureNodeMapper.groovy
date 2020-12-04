@@ -26,6 +26,7 @@ class AzureNodeMapper {
                                     "node-executor.selector=node_executor\n" +
                                     "file-copier.selector=file_copier\n" +
                                     "vmId.selector=azure_vmId\n" +
+                                    "primaryPublicIPAddress.selector=azure_primaryPublicIPAddress\n" +
                                     "size\\:name.selector=azure_size_name\n" +
                                     "size\\:numberOfCores.selector=azure_size_numberOfCores\n" +
                                     "size\\:memoryInMB.selector=azure_size_memoryInMB\n" +

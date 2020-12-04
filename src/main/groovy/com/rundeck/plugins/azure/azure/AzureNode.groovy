@@ -36,7 +36,7 @@ class AzureNode {
 
         this.username = vm.osProfile()?.adminUsername()
 
-        this.hostname = vm.getPrimaryPublicIPAddress()?.ipAddress()
+        this.hostname = vm.getPrimaryNetworkInterface()?.primaryIPConfiguration()?.privateIPAddress()
 
         if(this.hostname==null){
             //the offline machines doesn't have a IP selected
@@ -77,6 +77,7 @@ class AzureNode {
         azureAttributes.region = vm.region()?.name()
         azureAttributes.resourceGroup = vm.resourceGroupName()
         azureAttributes.status = vm.powerState()?.toString()?.replace("PowerState/","")
+        azureAttributes.primaryPublicIPAddress = vm.getPrimaryPublicIPAddress()?.ipAddress()
 
         if(vm.plan()!=null){
             azureAttributes."plan:name" = vm.plan().name()
@@ -129,6 +130,7 @@ class AzureNode {
             case "azure_status": return getAzureAttributes()!=null ? getAzureAttributes().get("status"):null
             case "azure_id": return getAzureAttributes()!=null ? getAzureAttributes().get("id"):null
             case "azure_vmId": return getAzureAttributes()!=null ? getAzureAttributes().get("vmId"):null
+            case "azure_primaryPublicIPAddress": return getAzureAttributes()!=null ? getAzureAttributes().get("primaryPublicIPAddress"):null
 
             case "azure_size_name": return getAzureAttributes()!=null ? getAzureAttributes().get("size:name"):null
             case "azure_size_numberOfCores": return getAzureAttributes()!=null ? getAzureAttributes().get("size:numberOfCores"):null
@@ -154,8 +156,6 @@ class AzureNode {
             case "azure_plan_name": return getAzureAttributes()!=null ? getAzureAttributes().get("plan:name"):null
             case "azure_plan_product": return getAzureAttributes()!=null ? getAzureAttributes().get("plan:product"):null
             case "azure_plan_publisher": return getAzureAttributes()!=null ? getAzureAttributes().get("plan:publisher"):null
-
-
 
             default:return getAzureAttributes()!=null ? getAzureAttributes().get(name):null;
         }
